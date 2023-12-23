@@ -6,7 +6,11 @@ import { UsersController } from './users/users.controller';
 import { BestsellerController } from './bestseller/bestseller.controller';
 
 @Module({
-  imports: [ConfigModule.forRoot()],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: process.env.NODE_ENV === 'production' ? '.production.env' : '.development.env',
+    }),
+  ],
   controllers: [AppController, UsersController, BestsellerController],
   providers: [AppService],
 })

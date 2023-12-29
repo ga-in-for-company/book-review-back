@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { UserInfo } from 'src/common/interface';
-import { CreateUserDto } from 'src/dto/create-user.dto';
-import { UserLoginDto } from 'src/dto/user-login.dto';
-import { VerifyEmailDto } from 'src/dto/verify-emial.dto';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { UserLoginDto } from 'src/users/dto/user-login.dto';
+import { VerifyEmailDto } from 'src/users/dto/verify-emial.dto';
 
 @Controller('users')
 export class UsersController {

@@ -1,26 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { CreateProviderDto } from '../provider/dto/create-provider.dto';
-import { UpdateProviderDto } from '../provider/dto/update-provider.dto';
-
+import * as uuid from 'uuid';
 @Injectable()
 export class UsersService {
-  create(createProviderDto: CreateProviderDto) {
-    return 'This action adds a new provider';
+  async createUser(name: string, email: string, password: string) {
+    await this.checkUserExists(email);
+
+    const signupVerifyToken = uuid.v1();
+
+    await this.saveUser(name, email, password, signupVerifyToken);
+    await this.sendMemberJoinEmail(email, signupVerifyToken);
   }
 
-  findAll() {
-    return `This action returns all provider`;
+  private checkUserExists(email: string) {
+    return false;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} provider`;
+  private saveUser(name: string, email: string, password: string, signupVerifyToken: string) {
+    return;
   }
 
-  update(id: number, updateProviderDto: UpdateProviderDto) {
-    return `This action updates a #${id} provider`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} provider`;
+  private async sendMemberJoinEmail(email: string, signupVerifyToken: string) {
+  await this.emailService.sendMemberJoinEVerification(email, signupVerifyToken);
   }
 }

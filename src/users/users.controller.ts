@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { UserInfo } from 'src/common/interface';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UserLoginDto } from 'src/users/dto/user-login.dto';
@@ -14,9 +14,9 @@ export class UsersController {
   }
 
   @Post('/email-verify')
-  async verifyEmail(@Query() dto: VerifyEmailDto): Promise<string> {
-    console.log(dto);
-    return;
+  async verifyEmail(@Body() dto: VerifyEmailDto): Promise<number> {
+    const randomNumber = await this.usersService.sendMemberJoinEmail(dto.receiver);
+    return randomNumber;
   }
 
   @Post('/login')
